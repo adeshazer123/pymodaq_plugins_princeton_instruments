@@ -9,4 +9,4 @@ author-email = 'nicolas.tappy@epfl.ch'
 license = 'MIT'
 
 [plugin-install]
-packages-required = ['pylablib']
+packages-required = ['pylablib','pyserial']
