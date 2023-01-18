@@ -22,7 +22,8 @@ Should support all cameras using picam through adaptative parameters parsing.
 
 Tested on Princeton Instrument PYLon BR eXcelon cameras.
 
-Support Princeton Instrument Acton SpectraPro SP2500i spectrometer. Limited function should work with other spectrometers of the same family (sp2150i, sp2300i)
+Support Princeton Instrument Acton SpectraPro SP2500i spectrometer. Limited functionalities are expected  work with other monochromators of the same family (sp2150i, sp2300i) but I advise caution
+as some hard-to-anticipate differences exist between these models that will induce unexpected behaviour.
 
 Viewer2D
 ++++++++
