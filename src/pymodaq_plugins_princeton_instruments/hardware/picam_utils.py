@@ -11,7 +11,6 @@ def get_ROI_dictlist(ROI):
         RDL.append({'title': k, 'name': k, 'type': 'int', 'value': getattr(ROI, k)})
     return RDL
 
-
 def define_pymodaq_pyqt_parameter(parameter):
     """Gets a parameter object from the pylablib module and initialise a dictionary compatible with pyqtgraph.
     Useful for getting automatically the parameters available for a camera.
@@ -85,7 +84,6 @@ def define_pymodaq_pyqt_parameter(parameter):
         p_dict.update({'limits': p_limits})
 
     return p_dict
-
 
 def sort_by_priority_list(values, priority):
     """

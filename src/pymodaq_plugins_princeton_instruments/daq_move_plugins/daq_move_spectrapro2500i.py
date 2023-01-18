@@ -25,7 +25,7 @@ class DAQ_Move_spectrapro2500i(DAQ_Move_base):
 	is_multiaxes = False
 	axes_names = ['Wavelength']
 
-	params = [{'title': 'Controller ID:', 'name': 'controller_id', 'type': 'str', 'value': '', 'readonly': True},
+	params = [{'title': 'Monochromator ID:', 'name': 'monochromator_id', 'type': 'str', 'value': '', 'readonly': True},
 			  {'title': 'COM Port:', 'name': 'com_port', 'type': 'list', 'values': com},
 			  {'title': 'Grating', 'name': 'grating', 'type': 'list', 'values': []},
 			  {'title': 'Exit mirror', 'name': 'exit_mirror', 'type': 'list', 'value': 'front',
@@ -116,7 +116,7 @@ class DAQ_Move_spectrapro2500i(DAQ_Move_base):
 				self.settings.child('grating').setValue(g)
 
 		spectroname = self.controller.get_mono_model()
-		self.settings.child('controller_id').setValue(spectroname)
+		self.settings.child('monochromator_id').setValue(spectroname)
 
 		info = f"Initialization successful: Monochromator model {spectroname} at com port {com}"
 		initialized = True

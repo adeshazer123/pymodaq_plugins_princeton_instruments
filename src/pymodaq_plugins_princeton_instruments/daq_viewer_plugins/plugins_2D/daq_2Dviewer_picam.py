@@ -271,6 +271,8 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
             # Prepare the viewer (2D by default)
             self._prepare_view()
 
+            self.settings.child('serial_number').setReadonly()
+
             self.status.info = "Initialised camera"
             self.status.initialized = True
             self.status.controller = self.controller
@@ -294,6 +296,7 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
         self.settings.child('settable_camera_parameters').remove()
         self.settings.child('read_only_camera_parameters').clearChildren()
         self.settings.child('read_only_camera_parameters').remove()
+        self.settings.child('serial_number').setWritable()
         # Reset the status of the Viewer Plugin
         self.status.initialized = False
         self.status.controller = None
@@ -367,6 +370,7 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
         self.controller.stop_acquisition()
         self.controller.clear_acquisition()
         self._toggle_non_online_parameters(enabled=True)
+
         return ''
 
 class PicamCallback(QtCore.QObject):
