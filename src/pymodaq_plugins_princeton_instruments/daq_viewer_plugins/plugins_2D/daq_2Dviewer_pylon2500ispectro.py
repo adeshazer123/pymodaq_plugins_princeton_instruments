@@ -265,6 +265,8 @@ class DAQ_2DViewer_pylon2500ispectro(DAQ_2DViewer_picam):
         spectroname = self.monochromator.get_mono_model()
         self.settings.child('monochromator_parameters', 'monochromator_id').setValue(spectroname)
 
+        self._compute_wavelength_axis()
+
         self.status.info = "Initialised Spectrometer"
         self.status.initialized = True
         self.status.controller = self.controller

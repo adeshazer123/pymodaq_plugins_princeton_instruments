@@ -180,6 +180,7 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
                         'ADC Quality',
                         'ROIs',
                         'Sensor Temperature Set Point',
+                        'Shutter Timing Mode',
                         ]
             remove = ['Active Width',
                       'Active Height',
@@ -194,7 +195,6 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
                       'Time Stamp Bit Depth',
                       'Frame Tracking Bit Depth',
                       'Shutter Delay Resolution',
-                      'Shutter Timing Monde',
                       'Trigger Response',
                       'Trigger Determination',
                       'Output Signal',
@@ -210,7 +210,6 @@ class DAQ_2DViewer_picam(DAQ_Viewer_base):
                       'Clean Until Trigger',
                       'Normalize Orientation',
                       'Correct Pixel Bias',
-                      'Shutter Timing Mode',
                       'Time Stamps',
                       'Time Stamp Resolution',
                       ]
