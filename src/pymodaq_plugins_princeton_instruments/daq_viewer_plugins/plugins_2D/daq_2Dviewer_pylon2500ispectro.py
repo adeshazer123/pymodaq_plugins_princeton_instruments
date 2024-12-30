@@ -59,7 +59,7 @@ class DAQ_2DViewer_pylon2500ispectro(DAQ_2DViewer_picam):
 
         self.monochromator = SpectraPro2500i(port='None')
 
-    def commit_settings(self, param):
+    def commit_settings(self, param: Parameter):
         """Commit setting changes to the device."""
         # Parameter from these groups are handled by the camera plugin
         if param.parent().name() in ['settable_camera_parameters', 'read_only_camera_parameters']:
@@ -213,6 +213,7 @@ class DAQ_2DViewer_pylon2500ispectro(DAQ_2DViewer_picam):
             * controller (object) initialized controller
             *initialized: (bool): False if initialization failed otherwise True
         """
+        self.ini_Detector_init(slave_controller=controller)
         _ = super().ini_detector(controller)
 
         if self.status.initialized == False:
@@ -241,33 +242,34 @@ class DAQ_2DViewer_pylon2500ispectro(DAQ_2DViewer_picam):
 
         self.settings.child('com_port_mono').setReadonly()
 
-        self.monochromator = SpectraPro2500i(port=self.settings.child('com_port_mono').value())
-        self.monochromator.open()
+        if self.is_master:
+            self.monochromator = SpectraPro2500i(port=self.settings.child('com_port_mono').value())
+            self.monochromator.open()
 
-        fl = self.monochromator.get_focal_length()
-        self.settings.child('monochromator_parameters', 'physical_parameters', 'focal_length').setValue(fl)
+            fl = self.monochromator.get_focal_length()
+            self.settings.child('monochromator_parameters', 'physical_parameters', 'focal_length').setValue(fl)
 
-        half_angle = self.monochromator.get_half_angle()
-        self.settings.child('monochromator_parameters', 'physical_parameters', 'dv_angle').setValue(half_angle)
+            half_angle = self.monochromator.get_half_angle()
+            self.settings.child('monochromator_parameters', 'physical_parameters', 'dv_angle').setValue(half_angle)
 
-        detector_angle = self.monochromator.get_detector_angle()
-        self.settings.child('monochromator_parameters', 'physical_parameters', 'det_angle').setValue(detector_angle)
+            detector_angle = self.monochromator.get_detector_angle()
+            self.settings.child('monochromator_parameters', 'physical_parameters', 'det_angle').setValue(detector_angle)
 
-        self.monochromator.ensure_mirror_is_set_to_exit()
+            self.monochromator.ensure_mirror_is_set_to_exit()
 
-        exitmirror = self.monochromator.get_mirror_position()
-        self.settings.child('monochromator_parameters', 'exit_mirror').setValue(exitmirror)
+            exitmirror = self.monochromator.get_mirror_position()
+            self.settings.child('monochromator_parameters', 'exit_mirror').setValue(exitmirror)
 
-        gratinglist = self.monochromator.get_all_gratings()
-        self.settings.child('monochromator_parameters', 'grating').setLimits(gratinglist)
-        for g in gratinglist:
+            gratinglist = self.monochromator.get_all_gratings()
+            self.settings.child('monochromator_parameters', 'grating').setLimits(gratinglist)
+            for g in gratinglist:
             if g.startswith('->'):
-                self.settings.child('monochromator_parameters', 'grating').setValue(g)
+            self.settings.child('monochromator_parameters', 'grating').setValue(g)
 
-        spectroname = self.monochromator.get_mono_model()
-        self.settings.child('monochromator_parameters', 'monochromator_id').setValue(spectroname)
+            spectroname = self.monochromator.get_mono_model()
+            self.settings.child('monochromator_parameters', 'monochromator_id').setValue(spectroname)
 
-        self._compute_wavelength_axis()
+            self._compute_wavelength_axis()
 
         self.status.info = "Initialised Spectrometer"
         self.status.initialized = True
