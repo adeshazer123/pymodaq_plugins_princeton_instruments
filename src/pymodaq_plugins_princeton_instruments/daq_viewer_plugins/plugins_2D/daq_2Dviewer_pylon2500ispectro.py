@@ -274,7 +274,7 @@ class DAQ_2DViewer_pylon2500ispectro(DAQ_2DViewer_picam):
         self.status.info = "Initialised Spectrometer"
         self.status.initialized = True
         self.status.controller = self.controller
-        return self.status
+        return self.status.info, self.status.initialized
 
     def close(self):
         """
