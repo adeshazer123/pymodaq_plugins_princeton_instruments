@@ -1,8 +1,10 @@
 import numpy as np
 from serial.tools.list_ports import comports
 from easydict import EasyDict as edict
-from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo, DataFromPlugins, Axis
+from pymodaq.daq_utils.daq_utils import ThreadCommand, getLineInfo
 from pymodaq.daq_viewer.utility_classes import DAQ_Viewer_base, comon_parameters, main
+from pymodaq.utils.data import DataFromPlugins, Axis, DataToExport
+from pymodaq.utils.parameter import Parameter
 
 from qtpy import QtWidgets, QtCore
 
